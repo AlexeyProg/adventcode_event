@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+class First
+{
+public:
+    void read_file(string filename)
+    {
+        ifstream file(filename);
+        if(file.is_open())
+        {
+            string line;
+            while(getline(file,line))
+            {
+                file_strings.push_back(line);
+            }
+            file.close();
+        }
+    }
+
+    vector<string> retake_info(vector<string>&v)
+    {
+        vector<string>words_list;
+        for(int i = 0; i < v.size(); i++)
+        {
+            string word;
+            for(int j = 0; j < v[0].size(); j++)
+            {
+                if(!isalnum(tolower(v[i][j])) && !isdigit(v[i][j]))
+                {
+                    if(word == "Game")
+                    {
+                        continue;
+                    }
+                    words_list.push_back(word);
+                    word.clear();
+                }
+                else
+                    word += v[i][j];
+            }
+        }
+        return words_list;
+    }
+
+    vector<string>file_strings;
+
+};
+
+int main()
+{
+    First *f = new First;
+    f->read_file("text.txt");
+
+    for(const auto &x : f->file_strings)
+    {
+        cout << x << endl;
+    }
+
+
+    vector<string> words = f->retake_info(f->file_strings);
+
+    // for(const auto &it : words)
+    // {
+    //     cout << it << " ";
+    // }
+    return 0;
+}
