@@ -27,7 +27,28 @@ class First
 public:
     void solution()                     // . . . 4
     {                                   // 3 * . 1
-                                        // 3 * * .
+                                        // 3 * . .
+        vector<int> digits;
+
+        for(int i = 0; i < file_str.size(); i++)
+        {
+            string dig;
+            for(int j = 0; j < file_str[i].size(); j++)
+            {
+                char cur_s = file_str[i][j];
+                
+                if(isdigit(cur_s))
+                {
+                    dig += cur_s;    
+                }
+                else
+                {
+                    int x = stoi(dig);
+                    digits.push_back(x);
+                    dig.clear();
+                }
+            }
+        }
     }
 
 };
@@ -36,9 +57,9 @@ int main()
 {
     read_file();
 
-    for(int i = 0; i < file_str.size(); i++)
-    {
-        cout << file_str[i] << " ";
-    }
+    // for(int i = 0; i < file_str.size(); i++)
+    // {
+    //     cout << file_str[i] << " - ";
+    // }
     return 0;
 }
